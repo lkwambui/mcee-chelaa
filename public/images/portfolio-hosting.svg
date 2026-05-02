@@ -1,0 +1,8 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#150F14"/>
+  <rect x="60" y="60" width="1080" height="780" rx="36" fill="#F5F5F5" fill-opacity="0.06" stroke="#D4AF37" stroke-opacity="0.35"/>
+  <circle cx="260" cy="220" r="110" fill="#D4AF37" fill-opacity="0.18"/>
+  <rect x="430" y="270" width="520" height="18" rx="9" fill="#F5F5F5" fill-opacity="0.65"/>
+  <rect x="430" y="310" width="420" height="14" rx="7" fill="#F5F5F5" fill-opacity="0.4"/>
+  <text x="170" y="720" fill="#D4AF37" font-family="Playfair Display, serif" font-size="56">Hosted Event</text>
+</svg>

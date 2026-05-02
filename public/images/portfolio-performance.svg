@@ -1,0 +1,8 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#0B0B0B"/>
+  <rect x="48" y="48" width="1104" height="804" rx="36" fill="#F5F5F5" fill-opacity="0.06" stroke="#D4AF37" stroke-opacity="0.35"/>
+  <circle cx="930" cy="210" r="120" fill="#D4AF37" fill-opacity="0.2"/>
+  <rect x="180" y="610" width="500" height="20" rx="10" fill="#F5F5F5" fill-opacity="0.76"/>
+  <rect x="180" y="650" width="350" height="14" rx="7" fill="#F5F5F5" fill-opacity="0.45"/>
+  <text x="180" y="730" fill="#D4AF37" font-family="Playfair Display, serif" font-size="56">Performance Moment</text>
+</svg>
