@@ -9,6 +9,7 @@ High-end personal brand website for Precious Owoko (MC Chelaa), built with Next.
 - Tailwind CSS 4
 - Framer Motion
 - Lucide icons
+- Neon Postgres for persistent bookings
 - API route for bookings with validation and optional SMTP delivery
 
 ## Local Development
@@ -39,7 +40,11 @@ The contact form posts to `POST /api/bookings`.
 
 - With SMTP vars configured, submissions are emailed.
 - Without SMTP, requests are still accepted and logged server-side as a safe fallback.
-- Submissions are persisted in `data/bookings.json` for admin inbox review.
+- Submissions are persisted in Neon Postgres for admin inbox review.
+
+### Required Database
+
+- `DATABASE_URL` (Neon Postgres connection string)
 
 ### Required for Email Sending
 

@@ -1,6 +1,5 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { randomUUID } from "node:crypto";
+import { getDbPool } from "@/lib/neon-db";
 
 export type BookingEntry = {
   id: string;
@@ -11,31 +10,62 @@ export type BookingEntry = {
   source: "form" | "fallback";
 };
 
-const dataDirectory = path.join(process.cwd(), "data");
-const dataFile = path.join(dataDirectory, "bookings.json");
+let tableReady: Promise<void> | null = null;
 
 async function ensureStorage() {
-  await mkdir(dataDirectory, { recursive: true });
+  const dbPool = getDbPool();
+
+  if (!tableReady) {
+    tableReady = dbPool
+      .query(`
+        CREATE TABLE IF NOT EXISTS bookings (
+          id text PRIMARY KEY,
+          name text NOT NULL,
+          email text NOT NULL,
+          message text NOT NULL,
+          source text NOT NULL CHECK (source IN ('form', 'fallback')),
+          created_at timestamptz NOT NULL DEFAULT now()
+        );
+      `)
+      .then(() => undefined);
+  }
+
+  await tableReady;
 }
 
 export async function getBookings(): Promise<BookingEntry[]> {
   await ensureStorage();
+  const dbPool = getDbPool();
 
-  try {
-    const raw = await readFile(dataFile, "utf8");
-    const parsed = JSON.parse(raw) as BookingEntry[];
-    if (!Array.isArray(parsed)) {
-      return [];
-    }
+  const result = await dbPool.query<{
+    id: string;
+    name: string;
+    email: string;
+    message: string;
+    source: "form" | "fallback";
+    created_at: string;
+  }>(
+    `
+      SELECT id, name, email, message, source, created_at
+      FROM bookings
+      ORDER BY created_at DESC
+      LIMIT 500;
+    `
+  );
 
-    return parsed;
-  } catch {
-    return [];
-  }
+  return result.rows.map((row) => ({
+    id: row.id,
+    name: row.name,
+    email: row.email,
+    message: row.message,
+    source: row.source,
+    createdAt: row.created_at,
+  }));
 }
 
 export async function saveBooking(input: Omit<BookingEntry, "id" | "createdAt">) {
-  const bookings = await getBookings();
+  await ensureStorage();
+  const dbPool = getDbPool();
 
   const nextRecord: BookingEntry = {
     id: randomUUID(),
@@ -43,8 +73,13 @@ export async function saveBooking(input: Omit<BookingEntry, "id" | "createdAt">)
     ...input,
   };
 
-  const nextBookings = [nextRecord, ...bookings].slice(0, 500);
-  await writeFile(dataFile, JSON.stringify(nextBookings, null, 2), "utf8");
+  await dbPool.query(
+    `
+      INSERT INTO bookings (id, name, email, message, source, created_at)
+      VALUES ($1, $2, $3, $4, $5, $6);
+    `,
+    [nextRecord.id, nextRecord.name, nextRecord.email, nextRecord.message, nextRecord.source, nextRecord.createdAt]
+  );
 
   return nextRecord;
 }
