@@ -82,14 +82,14 @@ body {
 
 .hero-overlay {
   background:
-    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.2), transparent 40%),
-    radial-gradient(circle at 90% 10%, rgba(90, 30, 60, 0.18), transparent 35%),
-    linear-gradient(to bottom, rgba(245, 245, 245, 0.15), rgba(245, 245, 245, 0.7));
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.12), transparent 100%),
+    radial-gradient(circle at 90% 10%, rgba(90, 30, 60, 0.11), transparent 100%),
+    linear-gradient(to bottom, rgba(245, 245, 245, 0.09), rgba(245, 245, 245, 0.5));
 }
 
 .dark .hero-overlay {
   background:
-    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.24), transparent 40%),
-    radial-gradient(circle at 90% 10%, rgba(90, 30, 60, 0.42), transparent 35%),
-    linear-gradient(to bottom, rgba(11, 11, 11, 0.58), rgba(11, 11, 11, 0.9));
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.15), transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(90, 30, 60, 0.25), transparent 35%),
+    linear-gradient(to bottom, rgba(11, 11, 11, 0.4), rgba(11, 11, 11, 0.65));
 }

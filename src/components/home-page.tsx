@@ -294,7 +294,7 @@ export function HomePage() {
                 View Portfolio
               </a>
             </div>
-            <p className="mt-8 text-sm uppercase tracking-[0.22em] text-accent">Grow from what&apos;s meant to kill you</p>
+            <p className="mt-8 text-2xl  uppercase tracking-[0.22em] text-foreground">Grow from what&apos;s meant to kill you</p>
           </motion.div>
         </div>
       </section>
@@ -309,7 +309,7 @@ export function HomePage() {
           className="relative min-h-105 overflow-hidden rounded-3xl"
         >
           <Image
-            src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1300&q=80"
+            src="/images/photo2.jpeg"
             alt="MC Chelaa portrait"
             fill
             unoptimized
