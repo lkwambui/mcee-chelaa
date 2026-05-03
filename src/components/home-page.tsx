@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
+import WhatsAppChatWidget from "@/components/WhatsAppChatWidget";
 import {
   AtSign,
   Award,
@@ -23,7 +24,6 @@ import {
   Video,
   Volume2,
   WandSparkles,
-  MessageCircle,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -691,15 +691,7 @@ export function HomePage() {
         © {new Date().getFullYear()} MC Chelaa · Art from the Heart
       </footer>
 
-      <a
-        href="https://wa.me/254719360781"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Chat on WhatsApp"
-        className="fixed right-5 bottom-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-[0_14px_30px_rgba(34,197,94,0.38)] transition hover:scale-105"
-      >
-        <MessageCircle className="h-6 w-6" />
-      </a>
+      <WhatsAppChatWidget phone="254719 360 781" />
     </motion.main>
   );
 }
