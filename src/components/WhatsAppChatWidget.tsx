@@ -339,7 +339,7 @@ export default function WhatsAppChatWidget({ phone, className }: WhatsAppChatWid
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label={isOpen ? "Close WhatsApp chat" : "Open WhatsApp chat"}
-        className="group fixed bottom-4 right-4 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#25D366]/40 focus-visible:scale-105 focus-visible:shadow-2xl focus-visible:shadow-[#25D366]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:bottom-6 sm:right-6 sm:h-14 sm:w-14"
+        className="group fixed bottom-4 right-4 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-[#25D366] text-white shadow-lg ring-2 ring-yellow-400/40 transition-transform duration-300 hover:scale-110 focus-visible:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:bottom-6 sm:right-6 sm:h-14 sm:w-14"
       >
         <span className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366]/45 blur-sm animate-pulse" />
         <svg aria-hidden="true" viewBox="0 0 24 24" className="relative h-5 w-5 sm:h-6 sm:w-6" fill="currentColor">

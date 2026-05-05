@@ -14,7 +14,7 @@ export default function Home() {
       "Media Personality",
       "Youth Empowerment Advocate",
     ],
-    slogan: "Art from the Heart",
+    slogan: "Furaha Yako ni Choice Yako",
     description:
       "Premium MC in Kenya and spoken word artist based in Nakuru, available for corporate events, weddings, and creative collaborations.",
     url: siteConfig.url,

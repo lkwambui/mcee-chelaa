@@ -24,11 +24,16 @@ export const metadata: Metadata = {
     "Spoken Word Artist Kenya",
     "MC Chelaa",
     "Precious Owoko",
+    "Walking Shadow Poetry Kenya",
+    "Youth Empowerment",
+    "Mental Health Advocate",
+    "Media Creative",
+    "Content Creator Kenya",
   ],
   openGraph: {
     title: siteConfig.title,
     description:
-      "Book MC Chelaa for premium event hosting, media collaborations, and spoken word performances in Kenya.",
+      "Book MC Chelaa for premium event hosting, spoken word performances, media collaborations, and empowerment initiatives in Kenya.",
     url: siteConfig.url,
     siteName: "MC Chelaa",
     locale: "en_KE",
@@ -38,7 +43,7 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1400,
         height: 900,
-        alt: "MC Chelaa on stage",
+        alt: "MC Chelaa - Spoken Word Artist and Media Creative",
       },
     ],
   },
@@ -46,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description:
-      "Art from the Heart — premium MC, spoken word artist, and media creative in Nakuru, Kenya.",
+      "Furaha Yako ni Choice Yako — MC Chelaa uses poetry and storytelling for healing, empowerment, and youth advocacy in Kenya.",
     images: [siteConfig.ogImage],
   },
 };

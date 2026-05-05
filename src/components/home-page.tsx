@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { type ComponentProps, FormEvent, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
 import WhatsAppChatWidget from "@/components/WhatsAppChatWidget";
@@ -22,7 +22,6 @@ import {
   Star,
   Users,
   Video,
-  Volume2,
   WandSparkles,
 } from "lucide-react";
 
@@ -44,69 +43,85 @@ const navItems = [
 const services = [
   {
     title: "Master of Ceremonies (MC)",
-    description: "Curated stage presence and audience command for corporate events, weddings, and premium celebrations.",
+    description: "Premium stage presence and audience command for corporate events, weddings, graduations, and celebrations. Seamless coordination with authentic energy.",
     icon: MicVocal,
   },
   {
     title: "Media Hosting (TV/Radio)",
-    description: "On-air storytelling with confidence, warmth, and intelligent pacing for modern broadcast experiences.",
+    description: "On-air storytelling with confidence, warmth, and intelligent pacing. Dynamic broadcast experiences across television and radio platforms.",
     icon: Radio,
   },
   {
     title: "Spoken Word Performance",
-    description: "Emotion-driven poetic performances that move audiences and make brand moments unforgettable.",
+    description: "Emotion-driven poetic performances that heal, empower, and inspire. Perfect for summits, faith-based events, and intimate artistic showcases.",
     icon: WandSparkles,
   },
   {
-    title: "Content Creation & Writing",
-    description: "Creative scripts, social campaigns, and concept storytelling crafted with precision and authenticity.",
+    title: "Mental Health & Empowerment",
+    description: "Using storytelling and poetry as tools for healing, resilience, and youth empowerment. Speaking engagements and awareness campaigns.",
+    icon: Sparkles,
+  },
+  {
+    title: "Content Creation & Scripting",
+    description: "Creative scripts, social campaigns, and concept storytelling crafted with precision. Digital media content and narrative development.",
     icon: Clapperboard,
   },
   {
-    title: "Voice-over Artistry",
-    description: "Expressive commercial and narrative voice work with polished delivery across media formats.",
-    icon: Volume2,
+    title: "Voice & Communication Coaching",
+    description: "Personal branding, stage confidence, and communication training for emerging creatives, leaders, and content creators.",
+    icon: Compass,
   },
   {
-    title: "Modeling & Training",
-    description: "Personal branding, stage confidence, and communication coaching for emerging creatives.",
-    icon: Compass,
+    title: "Social Media Management",
+    description: "Strategic digital presence, content planning, and community engagement across platforms. Building authentic connections and growing your brand voice.",
+    icon: Globe,
+  },
+  {
+    title: "High-Fashion Modeling & Training",
+    description: "Professional modeling services, personal styling, and model training for emerging talent. Confidence coaching and portfolio development.",
+    icon: Sparkles,
   },
 ];
 
 const portfolioImages = [
   {
     category: "Events Hosted",
-    src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/events/event1.jpeg",
+    alt: "MC Chelaa hosting a live event",
   },
   {
     category: "Spoken Word",
-    src: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/studio-session/photo5.jpeg",
+    alt: "MC Chelaa delivering a spoken word performance",
   },
   {
     category: "Media Appearance",
-    src: "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/media-appearance/media-appearance1.jpeg",
+    alt: "MC Chelaa during a media appearance",
   },
   {
     category: "Corporate Event",
-    src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/corporate-events/corporate-events1.jpeg",
+    alt: "MC Chelaa hosting a corporate event",
   },
   {
     category: "Wedding Celebration",
-    src: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/wedding/wedding1.jpeg",
+    alt: "MC Chelaa hosting a wedding celebration",
   },
   {
     category: "Studio Session",
-    src: "https://images.unsplash.com/photo-1516280030429-27679b3dc9cf?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/studio-session/photo12.jpeg",
+    alt: "MC Chelaa in a studio session",
   },
 ];
 
 const achievements = [
-  "Content Creator of the Year 2025 (2nd Runner Up)",
-  "AMWIK Awards (2nd Runner Up)",
-  "Fema Awards 2025 (Mcee of the Year)",
-  "Zuri Awards Nominee",
-  "SHE Awards Nominee",
+  "2nd Runners Up, Content Creator Of The Year 2025 (Valuable Brands South Rift Awards)",
+  "FEMA Awards 2025 - Mcee of the Year Recognition Award",
+  "2nd Runners Up, AMWIK Content Creator of the Year",
+  "Nominee, Zuri Awards 2024 (Arts, Culture & Entertainment)",
+  "Nominee, SHE Awards East Africa - Most Promising Founder (Under 30)",
   "Miss Laikipia University (2019–2020)",
 ];
 
@@ -117,20 +132,32 @@ const events = [
   "Mama Glow Day",
   "Bongo Reunion Kenya",
   "Graduation Events",
+  "Wedding Celebrations",
+  "Corporate Events & Conferences",
+  "Book Launches & Literary Events",
+  "Baby Showers & Celebrations",
+  "Youth Empowerment Summits",
+  "Faith-Based Conferences",
 ];
 
 const mediaShows = [
   {
     title: "Kicheko Dawa (MBCI)",
     description: "Live media personality showcase and audience-focused hosting segments.",
+    image: "/images/media-appearance/media-appearance2.jpeg",
+    alt: "MC Chelaa featured in Kicheko Dawa on MBCI",
   },
   {
     title: "The Edge Season 3",
     description: "Feature appearance highlighting voice, culture, and creative leadership.",
+    image: "/images/media-appearance/media-appearance3.jpeg",
+    alt: "MC Chelaa appearing on The Edge Season 3",
   },
   {
     title: "Voices of Artists Podcast",
     description: "Conversations around artistry, growth, and youth empowerment in Kenya.",
+    image: "/images/studio-session/photo11.jpeg",
+    alt: "MC Chelaa on the Voices of Artists Podcast",
   },
 ];
 
@@ -161,6 +188,34 @@ const fadeInUp = {
   hidden: { opacity: 0, y: 28 },
   show: { opacity: 1, y: 0 },
 };
+
+type LocalImageProps = Omit<ComponentProps<typeof Image>, "src"> & {
+  src: string;
+  fallbackSrc?: string;
+};
+
+function LocalImage({ src, fallbackSrc = "/images/events/event1.jpeg", alt, onError, ...props }: LocalImageProps) {
+  const [currentSrc, setCurrentSrc] = useState(src);
+
+  useEffect(() => {
+    setCurrentSrc(src);
+  }, [src]);
+
+  return (
+    <Image
+      {...props}
+      src={currentSrc}
+      alt={alt}
+      onError={(event) => {
+        if (currentSrc !== fallbackSrc) {
+          setCurrentSrc(fallbackSrc);
+        }
+
+        onError?.(event);
+      }}
+    />
+  );
+}
 
 function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) {
   return (
@@ -243,7 +298,7 @@ export function HomePage() {
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }} className="bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 shadow-sm backdrop-blur-md">
         <nav className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 md:px-10">
           <Link href="#home" className="font-serif text-2xl tracking-tight">
             MC <span className="text-gradient">Chelaa</span>
@@ -266,40 +321,51 @@ export function HomePage() {
 
       <section id="home" className="relative flex min-h-screen items-center overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1800&q=80"
-          alt="Elegant MC on stage"
+          src="/images/studio-session/photo10.jpeg"
+          alt="MC Chelaa performing on stage"
           fill
           priority
-          unoptimized
-          className="object-cover"
           sizes="100vw"
+          className="object-cover object-[70%_center] scale-[1.05]"
         />
-        <div className="hero-overlay absolute inset-0" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/40 to-transparent" />
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pt-28 pb-20 md:px-10">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
-            <Badge>Nakuru, Kenya</Badge>
-            <h1 className="mt-6 font-serif text-5xl leading-[1.05] md:text-7xl">
+        <div className="container relative z-10 mx-auto px-6 pt-28 pb-20 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="max-w-xl rounded-2xl border border-white/10 bg-black/40 px-6 py-8 shadow-2xl backdrop-blur-md transition duration-500 hover:bg-black/50 md:px-10 md:py-12"
+          >
+            <Badge className="border-white/30 bg-white/12 text-white">Nakuru, Kenya</Badge>
+            <h1 className="mt-6 max-w-lg text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
               MC Chelaa
-              <span className="mt-3 block text-gradient">Art from the Heart</span>
+              <span className="mt-3 block text-white/95">Furaha Yako ni Choice Yako</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-foreground/80 md:text-xl">
+            <div className="mt-4 h-1 w-16 rounded-full bg-yellow-500" />
+            <p className="mt-4 max-w-lg leading-relaxed text-white/80">
               Precious Owoko is a media creative, poetess, and premium event host crafting cinematic stage moments for brands, communities, and unforgettable experiences.
             </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a href="#contact" className={buttonVariants({ size: "lg" })}>
+            <div className="mt-6 flex flex-wrap gap-4">
+              <a
+                href="#contact"
+                className="rounded-full bg-yellow-500 px-6 py-3 font-medium text-black shadow-md transition duration-300 hover:scale-105 hover:bg-yellow-400"
+              >
                 Book Me
               </a>
-              <a href="#portfolio" className={buttonVariants({ variant: "outline", size: "lg" })}>
+              <a
+                href="#portfolio"
+                className="rounded-full border border-white/40 px-6 py-3 text-white transition duration-300 hover:bg-white/10"
+              >
                 View Portfolio
               </a>
             </div>
-            <p className="mt-8 text-2xl  uppercase tracking-[0.22em] text-foreground">Grow from what&apos;s meant to kill you</p>
+            <p className="mt-8 text-sm uppercase tracking-[0.3em] text-white/60">Grow from what&apos;s meant to kill you</p>
           </motion.div>
         </div>
       </section>
 
-      <section id="about" className="mx-auto grid w-full max-w-7xl gap-12 px-5 py-24 md:grid-cols-2 md:px-10">
+      <section id="about" className="mx-auto grid w-full max-w-7xl gap-12 px-6 pt-28 pb-24 lg:px-12 md:grid-cols-2">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -308,11 +374,10 @@ export function HomePage() {
           transition={{ duration: 0.55 }}
           className="relative min-h-105 overflow-hidden rounded-3xl"
         >
-          <Image
-            src="/images/photo2.jpeg"
-            alt="MC Chelaa portrait"
+          <LocalImage
+            src="/images/events/event4.jpeg"
+            alt="Portrait of MC Chelaa — media creative, poetess, and MC"
             fill
-            unoptimized
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
@@ -329,19 +394,20 @@ export function HomePage() {
           <Badge>About</Badge>
           <h2 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">Story, Voice, and Purpose</h2>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-            As the founder of Walking Shadow Poetry Kenya, MC Chelaa champions storytelling that heals, empowers, and transforms communities. Her voice blends elegance with emotional depth — from intimate spoken word sessions to high-level corporate stages.
+            As the founder of Walking Shadow Poetry Kenya, MC Chelaa is a rising leader in Kenya's creative and media space, uniquely blending art, leadership, and social impact. She champions storytelling as a tool for healing, empowerment, mental health awareness, and resilience. Her voice blends elegance with emotional depth—from intimate spoken word sessions to high-level corporate stages.
           </p>
           <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
-            She continues to mentor young creatives and advocate for youth empowerment through media, artistry, and intentional visibility.
+            With experience in broadcasting, acting, poetry, and community engagement, she continues to influence and inspire through authentic storytelling, faith-driven purpose, and creative expression. She mentors young creatives and advocates for youth empowerment through media, artistry, and intentional visibility.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Badge className="border-highlight/45 bg-highlight/20 text-foreground">Founder · Walking Shadow Poetry Kenya</Badge>
+            <Badge>Mental Health Advocate</Badge>
             <Badge>Youth Empowerment Advocate</Badge>
           </div>
         </motion.div>
       </section>
 
-      <section id="services" className="bg-muted/35 px-5 py-24 md:px-10">
+      <section id="services" className="bg-muted/35 px-6 py-24 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="Services"
@@ -378,7 +444,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="portfolio" className="mx-auto w-full max-w-7xl px-5 py-24 md:px-10">
+      <section id="portfolio" className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-12">
         <SectionTitle
           eyebrow="Portfolio"
           title="Moments in Motion"
@@ -396,12 +462,11 @@ export function HomePage() {
               transition={{ duration: 0.4, delay: index * 0.06 }}
               className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border"
             >
-              <Image
+              <LocalImage
                 src={item.src}
-                alt={item.category}
+                alt={item.alt}
                 width={700}
                 height={index % 2 === 0 ? 920 : 740}
-                unoptimized
                 className="h-auto w-full object-cover transition duration-500 hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
@@ -413,7 +478,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="achievements" className="bg-muted/35 px-5 py-24 md:px-10">
+      <section id="achievements" className="bg-muted/35 px-6 py-24 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="Achievements"
@@ -440,7 +505,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="experience" className="mx-auto w-full max-w-7xl px-5 py-24 md:px-10">
+      <section id="experience" className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-12">
         <SectionTitle
           eyebrow="Events"
           title="Featured Experience"
@@ -468,7 +533,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="media" className="bg-muted/35 px-5 py-24 md:px-10">
+      <section id="media" className="bg-muted/35 px-6 py-24 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="Media"
@@ -488,11 +553,10 @@ export function HomePage() {
               >
                 <Card className="h-full overflow-hidden">
                   <div className="relative h-52">
-                    <Image
-                      src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1400&q=80"
-                      alt={show.title}
+                    <LocalImage
+                      src={show.image}
+                      alt={show.alt}
                       fill
-                      unoptimized
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
@@ -554,7 +618,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="contact" className="bg-linear-to-b from-muted/45 to-transparent px-5 py-24 md:px-10">
+      <section id="contact" className="bg-linear-to-b from-muted/45 to-transparent px-6 py-24 lg:px-12">
         <div className="mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-2">
           <motion.div
             initial="hidden"
@@ -688,7 +752,7 @@ export function HomePage() {
       </section>
 
       <footer className="border-t border-border px-5 py-8 text-center text-sm text-muted-foreground md:px-10">
-        © {new Date().getFullYear()} MC Chelaa · Art from the Heart
+        © {new Date().getFullYear()} MC Chelaa · Furaha Yako ni Choice Yako
       </footer>
 
       <WhatsAppChatWidget phone="254719 360 781" />
