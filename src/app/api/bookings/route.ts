@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
-import { getBookings, saveBooking } from "@/lib/bookings-store";
 
 export const runtime = "nodejs";
 
@@ -94,8 +93,7 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const bookings = await getBookings();
-  return NextResponse.json({ ok: true, bookings });
+  return NextResponse.json({ ok: false, message: "Booking admin view is not available." }, { status: 410 });
 }
 
 export async function POST(request: NextRequest) {
@@ -139,19 +137,12 @@ export async function POST(request: NextRequest) {
   const transporter = getTransporter();
 
   if (!transporter || !senderEmail) {
-    console.info("[booking-fallback]", {
+    console.info("[booking-no-smtp]", {
       name: booking.name,
       email: booking.email,
       message: booking.message,
       targetEmail,
       createdAt: new Date().toISOString(),
-    });
-
-    await saveBooking({
-      name: booking.name,
-      email: booking.email,
-      message: booking.message,
-      source: "fallback",
     });
 
     return NextResponse.json({
@@ -176,28 +167,9 @@ export async function POST(request: NextRequest) {
       `,
     });
 
-    await saveBooking({
-      name: booking.name,
-      email: booking.email,
-      message: booking.message,
-      source: "form",
-    });
-
     return NextResponse.json({ ok: true, message: "Booking request sent successfully." });
   } catch (error) {
     console.error("[booking-error]", error);
-
-    // Fall back to saving the booking locally so the submission is not lost
-    try {
-      await saveBooking({
-        name: booking.name,
-        email: booking.email,
-        message: booking.message,
-        source: "fallback",
-      });
-    } catch (saveError) {
-      console.error("[booking-save-error]", saveError);
-    }
 
     return NextResponse.json({
       ok: true,

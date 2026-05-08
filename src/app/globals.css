@@ -93,3 +93,212 @@ body {
     radial-gradient(circle at 92% 8%, rgba(90, 30, 60, 0.3), transparent 35%),
     linear-gradient(100deg, rgba(10, 10, 10, 0.76) 0%, rgba(10, 10, 10, 0.58) 42%, rgba(10, 10, 10, 0.42) 72%, rgba(10, 10, 10, 0.56) 100%);
 }
+
+.hero-cinematic-bg {
+  background:
+    radial-gradient(
+      70% 88% at 84% 46%,
+      color-mix(in oklab, var(--accent) 22%, transparent) 0%,
+      transparent 74%
+    ),
+    radial-gradient(
+      56% 72% at 70% 38%,
+      color-mix(in oklab, var(--highlight) 45%, transparent) 0%,
+      transparent 72%
+    ),
+    linear-gradient(
+      100deg,
+      color-mix(in oklab, var(--highlight) 82%, black) 0%,
+      color-mix(in oklab, var(--highlight) 66%, black) 46%,
+      color-mix(in oklab, var(--highlight) 46%, transparent) 100%
+    );
+}
+
+.hero-subject-ambient {
+  background:
+    radial-gradient(
+      62% 62% at 42% 48%,
+      color-mix(in oklab, var(--foreground) 24%, transparent) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      74% 82% at 48% 56%,
+      color-mix(in oklab, var(--accent) 14%, transparent) 0%,
+      transparent 100%
+    );
+  filter: blur(24px);
+  opacity: 0.72;
+}
+
+.hero-separation-blur {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  -webkit-mask-image: radial-gradient(
+    70% 84% at 76% 48%,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.62) 58%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    70% 84% at 76% 48%,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.62) 58%,
+    transparent 100%
+  );
+  opacity: 0.4;
+}
+
+.hero-subject-soft {
+  filter:
+    contrast(1.04)
+    saturate(1.06)
+    drop-shadow(0 12px 26px color-mix(in oklab, var(--foreground) 28%, transparent))
+    drop-shadow(0 28px 46px color-mix(in oklab, var(--foreground) 18%, transparent));
+  -webkit-mask-image: radial-gradient(
+    92% 90% at 61% 40%,
+    rgba(0, 0, 0, 1) 64%,
+    rgba(0, 0, 0, 0.94) 72%,
+    rgba(0, 0, 0, 0.56) 86%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    92% 90% at 61% 40%,
+    rgba(0, 0, 0, 1) 64%,
+    rgba(0, 0, 0, 0.94) 72%,
+    rgba(0, 0, 0, 0.56) 86%,
+    transparent 100%
+  );
+  image-rendering: auto;
+}
+
+.hero-lower-fade {
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--highlight) 80%, black) 0%,
+    color-mix(in oklab, var(--highlight) 58%, transparent) 42%,
+    transparent 100%
+  );
+}
+
+.dark .hero-subject-ambient {
+  opacity: 0.62;
+}
+
+.dark .hero-separation-blur {
+  opacity: 0.34;
+}
+
+.achievement-featured-card {
+  box-shadow:
+    0 24px 60px color-mix(in oklab, var(--foreground) 10%, transparent),
+    0 1px 0 color-mix(in oklab, white 45%, transparent) inset;
+}
+
+.achievement-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.achievement-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    color-mix(in oklab, var(--accent) 8%, transparent) 0%,
+    transparent 45%,
+    color-mix(in oklab, var(--highlight) 8%, transparent) 100%
+  );
+  opacity: 0;
+  transition: opacity 240ms ease;
+  pointer-events: none;
+}
+
+.achievement-card:hover::before {
+  opacity: 1;
+}
+
+.achievement-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--accent) 36%, var(--border));
+}
+
+.dark .achievement-featured-card {
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.34),
+    0 1px 0 rgba(255, 255, 255, 0.04) inset;
+}
+
+.experience-card {
+  position: relative;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.experience-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--accent) 50%, transparent),
+    color-mix(in oklab, var(--highlight) 34%, transparent)
+  );
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.experience-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--accent) 36%, var(--border));
+  box-shadow: 0 12px 28px color-mix(in oklab, var(--foreground) 10%, transparent);
+}
+
+.experience-card:hover::after {
+  opacity: 1;
+}
+
+.featured-events-bg {
+  isolation: isolate;
+}
+
+.featured-events-glow {
+  background:
+    radial-gradient(60% 42% at 8% 26%, color-mix(in oklab, var(--highlight) 20%, transparent), transparent 72%),
+    radial-gradient(52% 44% at 94% 8%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 68%);
+  opacity: 0.9;
+  z-index: -1;
+}
+
+.event-portfolio-card {
+  transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+}
+
+.event-portfolio-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--accent) 36%, var(--border));
+  box-shadow:
+    0 20px 40px color-mix(in oklab, var(--foreground) 12%, transparent),
+    0 1px 0 color-mix(in oklab, white 50%, transparent) inset;
+}
+
+.event-card-glow {
+  background:
+    radial-gradient(circle at 16% 14%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 58%),
+    radial-gradient(circle at 86% 90%, color-mix(in oklab, var(--highlight) 22%, transparent), transparent 64%);
+  filter: blur(24px);
+}
+
+.dark .event-portfolio-card:hover {
+  box-shadow:
+    0 20px 38px rgba(0, 0, 0, 0.36),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
+}
+
+body[data-gallery-open="true"] .site-header {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+}

@@ -6,6 +6,7 @@ import { type ComponentProps, FormEvent, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
 import WhatsAppChatWidget from "@/components/WhatsAppChatWidget";
+import { EventGallery } from "@/components/EventGallery";
 import {
   AtSign,
   Award,
@@ -21,7 +22,6 @@ import {
   Sparkles,
   Star,
   Users,
-  Video,
   WandSparkles,
 } from "lucide-react";
 
@@ -30,12 +30,14 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { featuredEvents } from "@/lib/featured-events";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Portfolio", href: "#portfolio" },
+  { label: "Events", href: "#experience" },
   { label: "Achievements", href: "#achievements" },
   { label: "Contact", href: "#contact" },
 ];
@@ -85,6 +87,21 @@ const services = [
 
 const portfolioImages = [
   {
+    category: "AMWIK Event · 2026",
+    src: "/images/Amwik-event-Golden-Tulip-Hotel-Westlands-Nairobi-2026/WhatsApp Image 2026-05-06 at 12.25.08.jpeg",
+    alt: "MC Chelaa at the AMWIK event held at Golden Tulip Hotel, Westlands Nairobi in 2026",
+  },
+  {
+    category: "Little Mr & Miss Nakuru · 2026",
+    src: "/images/Little-Mr-and-Miss-Nakuru-2026/WhatsApp Image 2026-05-06 at 12.23.03.jpeg",
+    alt: "MC Chelaa hosting Little Mr and Miss Nakuru 2026",
+  },
+  {
+    category: "Shujaaz Nakuru Edition · 2026",
+    src: "/images/Shujaaz-Nakuru-edition-2026/WhatsApp Image 2026-05-06 at 12.23.47.jpeg",
+    alt: "MC Chelaa at Shujaaz Nakuru Edition 2026",
+  },
+  {
     category: "Events Hosted",
     src: "/images/events/event1.jpeg",
     alt: "MC Chelaa hosting a live event",
@@ -116,48 +133,79 @@ const portfolioImages = [
   },
 ];
 
-const achievements = [
-  "2nd Runners Up, Content Creator Of The Year 2025 (Valuable Brands South Rift Awards)",
-  "FEMA Awards 2025 - Mcee of the Year Recognition Award",
-  "2nd Runners Up, AMWIK Content Creator of the Year",
-  "Nominee, Zuri Awards 2024 (Arts, Culture & Entertainment)",
-  "Nominee, SHE Awards East Africa - Most Promising Founder (Under 30)",
-  "Miss Laikipia University (2019–2020)",
+type Achievement = {
+  title: string;
+  organization: string;
+  year: string;
+  result: string;
+  detail: string;
+  featured?: boolean;
+};
+
+const achievements: Achievement[] = [
+  {
+    title: "Content Creator of the Year",
+    organization: "Valuable Brands South Rift Awards",
+    year: "2025",
+    result: "2nd Runner-Up",
+    detail: "A standout milestone honoring consistent storytelling, audience connection, and visible creative impact.",
+    featured: true,
+  },
+  {
+    title: "MC of the Year Recognition Award",
+    organization: "FEMA Awards",
+    year: "2025",
+    result: "Recognition Award",
+    detail: "Celebrated for refined stage presence, audience command, and memorable event delivery.",
+  },
+  {
+    title: "Content Creator of the Year",
+    organization: "AMWIK",
+    year: "Recent",
+    result: "2nd Runner-Up",
+    detail: "Recognized for compelling digital storytelling and consistent content performance.",
+  },
+  {
+    title: "Arts, Culture & Entertainment",
+    organization: "Zuri Awards",
+    year: "2024",
+    result: "Nominee",
+    detail: "Shortlisted among emerging voices shaping arts, culture, and entertainment.",
+  },
+  {
+    title: "Most Promising Founder (Under 30)",
+    organization: "SHE Awards East Africa",
+    year: "Recent",
+    result: "Nominee",
+    detail: "Highlighted for leadership, innovation, and youth-centered creative influence.",
+  },
+  {
+    title: "Miss Laikipia University",
+    organization: "Laikipia University",
+    year: "2019–2020",
+    result: "Title Holder",
+    detail: "An early recognition that strengthened confidence, poise, and public presence.",
+  },
 ];
 
-const events = [
-  "Breaking the Barrier Summit (Naivasha)",
-  "Gen Z Loves Jesus",
-  "Mziki Gospel Tour",
-  "Mama Glow Day",
-  "Bongo Reunion Kenya",
-  "Graduation Events",
-  "Wedding Celebrations",
-  "Corporate Events & Conferences",
-  "Book Launches & Literary Events",
-  "Baby Showers & Celebrations",
-  "Youth Empowerment Summits",
-  "Faith-Based Conferences",
-];
+const featuredAchievement = achievements.find((achievement) => achievement.featured) ?? achievements[0];
+const supportingAchievements = achievements.filter((achievement) => achievement !== featuredAchievement);
 
 const mediaShows = [
   {
-    title: "Kicheko Dawa (MBCI)",
-    description: "Live media personality showcase and audience-focused hosting segments.",
-    image: "/images/media-appearance/media-appearance2.jpeg",
-    alt: "MC Chelaa featured in Kicheko Dawa on MBCI",
-  },
-  {
-    title: "The Edge Season 3",
-    description: "Feature appearance highlighting voice, culture, and creative leadership.",
-    image: "/images/media-appearance/media-appearance3.jpeg",
-    alt: "MC Chelaa appearing on The Edge Season 3",
-  },
-  {
     title: "Voices of Artists Podcast",
-    description: "Conversations around artistry, growth, and youth empowerment in Kenya.",
-    image: "/images/studio-session/photo11.jpeg",
-    alt: "MC Chelaa on the Voices of Artists Podcast",
+    description: "A reflective podcast segment where MC Chelaa shares her creative journey, purpose-driven storytelling, and media impact.",
+    src: "/videos/voices-of-artists.mp4",
+  },
+  {
+    title: "Awards Moment",
+    description: "A highlight from award-stage recognition, capturing poise, gratitude, and her growing influence in Kenya's creative space.",
+    src: "/videos/awards.mp4",
+  },
+  {
+    title: "Mama Glow Event",
+    description: "Live event hosting clip showcasing warm crowd connection, smooth stage transitions, and premium audience engagement.",
+    src: "/videos/mama-glow-event.mp4",
   },
 ];
 
@@ -236,56 +284,21 @@ function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title:
 
 export function HomePage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-    website: "",
-  });
-  const [submitState, setSubmitState] = useState<{
-    status: "idle" | "loading" | "success" | "error";
-    message: string;
-  }>({
-    status: "idle",
-    message: "",
   });
 
-  const handleBookingSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleBookingSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitState({ status: "loading", message: "Sending your booking request..." });
-
-    try {
-      const response = await fetch("/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = (await response.json()) as { ok: boolean; message: string };
-
-      if (!response.ok || !data.ok) {
-        setSubmitState({
-          status: "error",
-          message: data.message || "Something went wrong. Please try again.",
-        });
-        return;
-      }
-
-      setSubmitState({ status: "success", message: data.message });
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-        website: "",
-      });
-    } catch {
-      setSubmitState({
-        status: "error",
-        message: "Unable to submit right now. Please try again shortly.",
-      });
-    }
+    const subject = encodeURIComponent(`Booking Request from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+    window.location.href = `mailto:mcchelaa254@gmail.com?subject=${subject}&body=${body}`;
+    setFormData({ name: "", email: "", message: "" });
   };
 
   useEffect(() => {
@@ -298,7 +311,12 @@ export function HomePage() {
 
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }} className="bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 shadow-sm backdrop-blur-md">
+      <header
+        className={cn(
+          "site-header fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 shadow-sm backdrop-blur-md",
+          isGalleryOpen && "pointer-events-none -translate-y-full opacity-0"
+        )}
+      >
         <nav className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 md:px-10">
           <Link href="#home" className="font-serif text-2xl tracking-tight">
             MC <span className="text-gradient">Chelaa</span>
@@ -319,16 +337,20 @@ export function HomePage() {
         </nav>
       </header>
 
-      <section id="home" className="relative flex min-h-screen items-center overflow-hidden">
+      <section id="home" className="relative flex min-h-screen items-center overflow-hidden bg-highlight/25">
+        <div className="hero-cinematic-bg absolute inset-0" aria-hidden />
+        <div className="hero-subject-ambient absolute inset-y-0 right-0 z-1 w-[62%]" aria-hidden />
         <Image
-          src="/images/studio-session/photo10.jpeg"
+          src="/images/mcee.jpeg"
           alt="MC Chelaa performing on stage"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[70%_center] scale-[1.05]"
+          className="hero-subject-soft object-cover object-[center_14%] sm:object-[center_12%] md:object-[58%_16%] lg:object-[60%_18%] xl:object-[61%_20%]"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/40 to-transparent" />
+        <div className="hero-separation-blur absolute inset-0 z-2" aria-hidden />
+        <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/35 to-transparent" />
+        <div className="hero-lower-fade absolute inset-x-0 bottom-0 z-3 h-[40%]" aria-hidden />
 
         <div className="container relative z-10 mx-auto px-6 pt-28 pb-20 lg:px-12">
           <motion.div
@@ -344,7 +366,7 @@ export function HomePage() {
             </h1>
             <div className="mt-4 h-1 w-16 rounded-full bg-yellow-500" />
             <p className="mt-4 max-w-lg leading-relaxed text-white/80">
-              Precious Owoko is a media creative, poetess, and premium event host crafting cinematic stage moments for brands, communities, and unforgettable experiences.
+              MC Chelaa is a media creative, poetess, and premium event host crafting cinematic stage moments for brands, communities, and unforgettable experiences.
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
               <a
@@ -378,8 +400,9 @@ export function HomePage() {
             src="/images/events/event4.jpeg"
             alt="Portrait of MC Chelaa — media creative, poetess, and MC"
             fill
+            quality={100}
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
           />
         </motion.div>
 
@@ -486,51 +509,122 @@ export function HomePage() {
             description="Milestones that reflect excellence, consistency, and meaningful influence in Kenya&apos;s creative and media space."
           />
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {achievements.map((item, index) => (
-              <motion.div
-                key={item}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.25 }}
-                variants={fadeInUp}
-                transition={{ duration: 0.4, delay: index * 0.06 }}
-                className="glass flex items-center gap-3 rounded-2xl p-5"
-              >
-                <Award className="h-5 w-5 text-accent" />
-                <p className="text-[15px] text-foreground/92">{item}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="experience" className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-12">
-        <SectionTitle
-          eyebrow="Events"
-          title="Featured Experience"
-          description="Major stages and audiences where MC Chelaa has delivered high-impact hosting and creative excellence."
-        />
-
-        <div className="grid gap-6 md:grid-cols-3">
-          {events.map((event, index) => (
-            <motion.div
-              key={event}
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+            <motion.article
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.25 }}
               variants={fadeInUp}
-              transition={{ duration: 0.38, delay: index * 0.05 }}
+              transition={{ duration: 0.45 }}
+              className="achievement-featured-card glass group relative self-start overflow-hidden rounded-3xl border border-accent/20 p-7 md:p-8"
             >
-              <Card className="h-full p-6">
-                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-highlight/25 text-foreground">
-                  <Star className="h-4 w-4" />
+              <div className="absolute inset-0 bg-linear-to-br from-accent/8 via-transparent to-highlight/10 opacity-90" aria-hidden />
+              <div className="absolute -top-24 -right-14 h-56 w-56 rounded-full bg-accent/12 blur-3xl" aria-hidden />
+              <div className="absolute inset-y-0 left-0 w-1.5 bg-accent" aria-hidden />
+              <div className="relative flex h-full flex-col pl-2">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Badge className="border-accent/30 bg-accent/12 text-foreground">Featured Recognition</Badge>
+                  <Badge className="border-border/80 bg-background/70 text-foreground/80">
+                    {featuredAchievement.year}
+                  </Badge>
                 </div>
-                <p className="font-medium leading-relaxed text-foreground/90">{event}</p>
-              </Card>
-            </motion.div>
-          ))}
+
+                <div className="mt-6 flex items-start gap-4">
+                  <div className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-accent/20 bg-background/75 text-accent shadow-lg shadow-accent/10">
+                    <Award className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">
+                      {featuredAchievement.result}
+                    </p>
+                    <h3 className="mt-2 font-serif text-3xl leading-tight text-foreground md:text-4xl">
+                      {featuredAchievement.title}
+                    </h3>
+                    <p className="mt-3 text-base text-foreground/85 md:text-lg">
+                      {featuredAchievement.organization}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
+                  {featuredAchievement.detail}
+                </p>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  {[
+                    { label: "Award Body", value: featuredAchievement.organization },
+                    { label: "Recognition", value: featuredAchievement.result },
+                    { label: "Year", value: featuredAchievement.year },
+                  ].map((meta) => (
+                    <div
+                      key={meta.label}
+                      className="rounded-2xl border border-white/40 bg-background/62 px-4 py-3 backdrop-blur-sm dark:border-white/8"
+                    >
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                        {meta.label}
+                      </p>
+                      <p className="mt-2 text-sm font-medium leading-relaxed text-foreground/90">
+                        {meta.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.article>
+
+            <motion.ul
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeInUp}
+              transition={{ duration: 0.4, delay: 0.05 }}
+              className="grid gap-4"
+            >
+              {supportingAchievements.map((item, index) => (
+                <motion.li
+                  key={`${item.organization}-${item.title}`}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.25 }}
+                  variants={fadeInUp}
+                  transition={{ duration: 0.35, delay: index * 0.05 }}
+                  className="achievement-card glass flex items-start gap-4 rounded-2xl border border-border/70 p-5"
+                >
+                  <div className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+                    <Star className="h-4 w-4" />
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+                        {item.result}
+                      </p>
+                      <Badge className="border-border/80 bg-background/65 text-xs text-foreground/80">
+                        {item.year}
+                      </Badge>
+                    </div>
+                    <h3 className="mt-2 text-base font-semibold leading-snug text-foreground md:text-lg">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-foreground/80">{item.organization}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+                  </div>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
         </div>
+      </section>
+
+      <section id="experience" className="featured-events-bg relative mx-auto w-full max-w-7xl overflow-hidden px-6 py-24 lg:px-12">
+        <div className="featured-events-glow pointer-events-none absolute inset-0" aria-hidden />
+        <SectionTitle
+          eyebrow="Events"
+          title="Featured Events"
+          description="Cinematic highlights from premium hosted events across Nairobi and Nakuru, blending elegance, stage command, and audience connection."
+        />
+
+        <EventGallery events={featuredEvents} onOpenChange={setIsGalleryOpen} />
       </section>
 
       <section id="media" className="bg-muted/35 px-6 py-24 lg:px-12">
@@ -552,19 +646,11 @@ export function HomePage() {
                 transition={{ duration: 0.42, delay: index * 0.05 }}
               >
                 <Card className="h-full overflow-hidden">
-                  <div className="relative h-52">
-                    <LocalImage
-                      src={show.image}
-                      alt={show.alt}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-foreground/30">
-                      <div className="rounded-full bg-background/70 p-4 text-accent">
-                        <Video className="h-5 w-5" />
-                      </div>
-                    </div>
+                  <div className="relative aspect-video bg-black">
+                    <video controls preload="metadata" className="h-full w-full object-cover" aria-label={show.title}>
+                      <source src={show.src} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
                   <CardHeader>
                     <CardTitle className="text-2xl">{show.title}</CardTitle>
@@ -679,20 +765,6 @@ export function HomePage() {
           >
             <Card className="glass p-6 md:p-8">
               <form className="space-y-4" onSubmit={handleBookingSubmit}>
-                <input
-                  type="text"
-                  name="website"
-                  value={formData.website}
-                  onChange={(event) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      website: event.target.value,
-                    }))
-                  }
-                  className="hidden"
-                  autoComplete="off"
-                  tabIndex={-1}
-                />
                 <Input
                   placeholder="Your Name"
                   name="name"
@@ -732,19 +804,9 @@ export function HomePage() {
                   minLength={10}
                   required
                 />
-                <Button className="w-full" size="lg" type="submit" disabled={submitState.status === "loading"}>
-                  {submitState.status === "loading" ? "Sending..." : "Send Booking Request"}
+                <Button className="w-full" size="lg" type="submit">
+                  Send Booking Request
                 </Button>
-                {submitState.status !== "idle" && (
-                  <p
-                    className={cn(
-                      "text-sm",
-                      submitState.status === "success" ? "text-green-600 dark:text-green-400" : submitState.status === "error" ? "text-rose-600 dark:text-rose-300" : "text-muted-foreground"
-                    )}
-                  >
-                    {submitState.message}
-                  </p>
-                )}
               </form>
             </Card>
           </motion.div>
