@@ -1,80 +1,81 @@
-# MC Chelaa — Premium Personal Brand Website
+# MC Chelaa — Personal Brand Website
 
-High-end personal brand website for Precious Owoko (MC Chelaa), built with Next.js App Router, Tailwind CSS, Framer Motion, and reusable shadcn-style UI primitives.
+Official website for Precious Owoko (MC Chelaa), built with Next.js App Router, React, TypeScript, and Tailwind CSS.
 
-## Stack
+## Tech Stack
 
 - Next.js 16 (App Router)
 - React 19 + TypeScript
 - Tailwind CSS 4
 - Framer Motion
-- Lucide icons
-- Neon Postgres for persistent bookings
-- API route for bookings with validation and optional SMTP delivery
+- Lucide React
 
-## Local Development
+## Getting Started
 
 1. Install dependencies:
 
-	```bash
-	npm install
-	```
+   ```bash
+   npm install
+   ```
 
 2. Copy environment variables:
 
-	```bash
-	cp .env.example .env.local
-	```
+   ```bash
+   cp .env.example .env.local
+   ```
 
-3. Run the dev server:
+3. Start development server:
 
-	```bash
-	npm run dev
-	```
+   ```bash
+   npm run dev
+   ```
 
-4. Visit [http://localhost:3000](http://localhost:3000).
+4. Open [http://localhost:3000](http://localhost:3000).
 
-## Booking Form Delivery
+## Scripts
 
-The contact form posts to `POST /api/bookings`.
+- `npm run dev` — Start local dev server
+- `npm run build` — Build production bundle
+- `npm run start` — Run production server
+- `npm run lint` — Run ESLint
 
-- With SMTP vars configured, submissions are emailed.
-- Without SMTP, requests are still accepted and logged server-side as a safe fallback.
-- Submissions are persisted in Neon Postgres for admin inbox review.
+## Booking API
 
-### Required Database
+The booking/contact form submits to `POST /api/bookings`.
 
-- `DATABASE_URL` (Neon Postgres connection string)
+Current behavior:
 
-### Required for Email Sending
+- Validates payload using Zod.
+- Uses simple rate limiting by requester IP.
+- Uses a honeypot (`website`) field for spam mitigation.
+- Sends email when SMTP environment variables are configured.
+- Falls back to server logging when SMTP is not configured.
+
+### Environment Variables
+
+Required for email sending:
 
 - `SMTP_HOST`
 - `SMTP_PORT`
 - `SMTP_USER`
 - `SMTP_PASS`
 
-### Optional
+Optional:
 
-- `BOOKING_TO_EMAIL` (defaults to `mcchelaa254@gmail.com`)
-- `BOOKING_FROM_EMAIL` (defaults to `SMTP_USER`)
-- `NEXT_PUBLIC_SITE_URL` (used for SEO metadata, sitemap, robots)
+- `BOOKING_TO_EMAIL` (default: `mcchelaa254@gmail.com`)
+- `BOOKING_FROM_EMAIL` (default: `SMTP_USER`)
+- `NEXT_PUBLIC_SITE_URL` (used for SEO metadata, `robots.ts`, and `sitemap.ts`)
 
-### Admin Inbox
+## Admin Bookings
 
-- Route: `/admin/bookings`
-- API source: `GET /api/bookings` (requires header token)
-- Required env: `BOOKINGS_ADMIN_TOKEN`
-- Enter the token in the admin page to load submissions.
+- UI route: `/admin/bookings`
+- API route: `GET /api/bookings`
+- `BOOKINGS_ADMIN_TOKEN` is required for authenticated access.
 
-## Quality Checks
-
-```bash
-npm run lint
-npm run build
-```
+Note: the current `GET /api/bookings` endpoint responds with `410` (not available), so the admin inbox page is currently non-functional until backend retrieval is re-enabled.
 
 ## Deployment Notes
 
-- Set `NEXT_PUBLIC_SITE_URL` to your production domain (for example, `https://mcchelaa.com`).
-- Add SMTP credentials in hosting environment variables to enable live booking emails.
-- `robots.txt` and `sitemap.xml` are generated via App Router metadata file conventions.
+- Set `NEXT_PUBLIC_SITE_URL` to your production domain.
+- Configure SMTP variables in your hosting environment for live email delivery.
+- `robots.txt` and `sitemap.xml` are generated via App Router metadata routes.
