@@ -82,7 +82,12 @@ export function EventCard({ event, index, className, onViewGallery, onPreviewSel
             ))}
           </div>
 
-          <Button type="button" size="sm" className="gap-2" onClick={onViewGallery}>
+          <Button
+            type="button"
+            size="sm"
+            className="gap-2 w-full max-w-[160px] md:w-auto md:max-w-none"
+            onClick={onViewGallery}
+          >
             <Images className="h-4 w-4" />
             View Gallery
           </Button>
