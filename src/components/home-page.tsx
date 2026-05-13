@@ -88,17 +88,17 @@ const services = [
 const portfolioImages = [
   {
     category: "AMWIK Event · 2026",
-    src: "/images/Amwik-event-Golden-Tulip-Hotel-Westlands-Nairobi-2026/WhatsApp Image 2026-05-06 at 12.25.08.jpeg",
+    src: "/images/Amwik-event-Golden-Tulip-Hotel-Westlands-Nairobi-2026/photo19.jpeg",
     alt: "MC Chelaa at the AMWIK event held at Golden Tulip Hotel, Westlands Nairobi in 2026",
   },
   {
     category: "Little Mr & Miss Nakuru · 2026",
-    src: "/images/Little-Mr-and-Miss-Nakuru-2026/WhatsApp Image 2026-05-06 at 12.23.03.jpeg",
+    src: "/images/Little-Mr-and-Miss-Nakuru-2026/photo7.jpeg",
     alt: "MC Chelaa hosting Little Mr and Miss Nakuru 2026",
   },
   {
     category: "Shujaaz Nakuru Edition · 2026",
-    src: "/images/Shujaaz-Nakuru-edition-2026/WhatsApp Image 2026-05-06 at 12.23.47.jpeg",
+    src: "/images/Shujaaz-Nakuru-edition-2026/photo6.jpeg",
     alt: "MC Chelaa at Shujaaz Nakuru Edition 2026",
   },
   {
@@ -341,7 +341,7 @@ export function HomePage() {
         <div className="hero-cinematic-bg absolute inset-0" aria-hidden />
         <div className="hero-subject-ambient absolute inset-y-0 right-0 z-1 w-[62%]" aria-hidden />
         <Image
-          src="/images/mcee.jpeg"
+          src="/images/Amwik-event-Golden-Tulip-Hotel-Westlands-Nairobi-2026/photo1.jpeg"
           alt="MC Chelaa performing on stage"
           fill
           priority
@@ -397,7 +397,7 @@ export function HomePage() {
           className="relative min-h-105 overflow-hidden rounded-3xl"
         >
           <LocalImage
-            src="/images/events/event4.jpeg"
+            src="/images/corporate-events/corporate-events4.jpeg"
             alt="Portrait of MC Chelaa — media creative, poetess, and MC"
             fill
             quality={100}

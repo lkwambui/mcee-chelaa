@@ -156,14 +156,16 @@ export function LightboxModal({ event, isOpen, initialIndex = 0, onClose }: Ligh
               onDragEnd={onImageDragEnd}
               className="relative h-full w-full max-h-[72vh] cursor-grab active:cursor-grabbing"
             >
-              <Image
-                src={currentImage.src}
-                alt={currentImage.alt}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 1200px"
-                className="object-contain"
-              />
+              {currentImage ? (
+                <Image
+                  src={currentImage.src}
+                  alt={currentImage.alt}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 1200px"
+                  className="object-contain"
+                />
+              ) : null}
             </motion.div>
 
             <button

@@ -22,7 +22,7 @@ export const featuredEvents: FeaturedEvent[] = [
     description:
       "A high-profile women-in-media event hosted with polished stage transitions, warm audience command, and premium brand presence.",
     coverImage: {
-      src: "/images/events/amwik-event-2026/cover.jpeg",
+      src: "/images/events/amwik-event-2026/gallery-5.jpeg",
       alt: "MC Chelaa hosting the AMWIK Event at Golden Tulip Hotel, Westlands Nairobi in 2026",
     },
     galleryImages: [
@@ -42,6 +42,30 @@ export const featuredEvents: FeaturedEvent[] = [
         src: "/images/events/amwik-event-2026/gallery-4.jpeg",
         alt: "Premium hosted moment from AMWIK Event in Nairobi",
       },
+      {
+        src: "/images/events/amwik-event-2026/gallery-5.jpeg",
+        alt: "AMWIK Event group photo",
+      },
+      {
+        src: "/images/events/amwik-event-2026/gallery-6.jpeg",
+        alt: "Networking at AMWIK Event",
+      },
+      {
+        src: "/images/events/amwik-event-2026/gallery-7.jpeg",
+        alt: "Panel session at AMWIK Event",
+      },
+      {
+        src: "/images/events/amwik-event-2026/gallery-8.jpeg",
+        alt: "Award presentation at AMWIK Event",
+      },
+      {
+        src: "/images/events/amwik-event-2026/gallery-9.jpeg",
+        alt: "Audience applause at AMWIK Event",
+      },
+      {
+        src: "/images/events/amwik-event-2026/gallery-001.jpeg",
+        alt: "Candid moment at AMWIK Event",
+      },
     ],
   },
   {
@@ -52,7 +76,7 @@ export const featuredEvents: FeaturedEvent[] = [
     description:
       "A vibrant family-centered pageant featuring energetic hosting, seamless stage coordination, and memorable candidate moments.",
     coverImage: {
-      src: "/images/events/little-mr-miss-nakuru-2026/cover.jpeg",
+      src: "/images/events/little-mr-miss-nakuru-2026/gallery-3.jpeg",
       alt: "MC Chelaa at Little Mr and Miss Nakuru 2026",
     },
     galleryImages: [
@@ -67,6 +91,34 @@ export const featuredEvents: FeaturedEvent[] = [
       {
         src: "/images/events/little-mr-miss-nakuru-2026/gallery-3.jpeg",
         alt: "Audience and participant moment from Little Mr and Miss Nakuru 2026",
+      },
+      {
+        src: "/images/events/little-mr-miss-nakuru-2026/WhatsApp%20Image%202026-05-06%20at%2012.23.03.jpeg",
+        alt: "Little Mr & Miss Nakuru 2026 - candid moment 1",
+      },
+      {
+        src: "/images/events/little-mr-miss-nakuru-2026/WhatsApp%20Image%202026-05-06%20at%2012.23.04.jpeg",
+        alt: "Little Mr & Miss Nakuru 2026 - candid moment 2",
+      },
+      {
+        src: "/images/events/little-mr-miss-nakuru-2026/WhatsApp%20Image%202026-05-06%20at%2012.23.06.jpeg",
+        alt: "Little Mr & Miss Nakuru 2026 - candid moment 3",
+      },
+      {
+        src: "/images/events/little-mr-miss-nakuru-2026/WhatsApp%20Image%202026-05-06%20at%2012.23.06%20(1).jpeg",
+        alt: "Little Mr & Miss Nakuru 2026 - candid moment 4",
+      },
+      {
+        src: "/images/events/little-mr-miss-nakuru-2026/WhatsApp%20Image%202026-05-06%20at%2012.23.07.jpeg",
+        alt: "Little Mr & Miss Nakuru 2026 - candid moment 5",
+      },
+      {
+        src: "/images/events/little-mr-miss-nakuru-2026/WhatsApp%20Image%202026-05-06%20at%2012.23.07%20(1).jpeg",
+        alt: "Little Mr & Miss Nakuru 2026 - candid moment 6",
+      },
+      {
+        src: "/images/events/little-mr-miss-nakuru-2026/WhatsApp%20Image%202026-05-06%20at%2012.27.40.jpeg",
+        alt: "Little Mr & Miss Nakuru 2026 - candid moment 7",
       },
     ],
   },
@@ -93,6 +145,30 @@ export const featuredEvents: FeaturedEvent[] = [
       {
         src: "/images/events/shujaaz-nakuru-edition-2026/gallery-3.jpeg",
         alt: "MC Chelaa at Shujaaz Nakuru Edition 2026 event flow",
+      },
+      {
+        src: "/images/events/shujaaz-nakuru-edition-2026/gallery-4.jpeg",
+        alt: "Shujaaz Nakuru Edition 2026 - highlight 1",
+      },
+      {
+        src: "/images/events/shujaaz-nakuru-edition-2026/gallery-5.jpeg",
+        alt: "Shujaaz Nakuru Edition 2026 - highlight 2",
+      },
+      {
+        src: "/images/events/shujaaz-nakuru-edition-2026/gallery-6.jpeg",
+        alt: "Shujaaz Nakuru Edition 2026 - highlight 3",
+      },
+      {
+        src: "/images/events/shujaaz-nakuru-edition-2026/gallery-7.jpeg",
+        alt: "Shujaaz Nakuru Edition 2026 - highlight 4",
+      },
+      {
+        src: "/images/events/shujaaz-nakuru-edition-2026/gallery-8.jpeg",
+        alt: "Shujaaz Nakuru Edition 2026 - highlight 5",
+      },
+      {
+        src: "/images/events/shujaaz-nakuru-edition-2026/cover.jpeg",
+        alt: "Shujaaz Nakuru Edition 2026 - cover moment",
       },
     ],
   },
