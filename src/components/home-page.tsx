@@ -60,6 +60,7 @@ const navItems = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Portfolio", href: "#portfolio" },
+  { label: "Gallery", href: "#curated-gallery" },
   { label: "Events", href: "#experience" },
   { label: "Achievements", href: "#achievements" },
   { label: "Contact", href: "#contact" },
