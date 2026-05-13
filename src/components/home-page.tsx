@@ -353,7 +353,6 @@ export function HomePage() {
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <ThemeToggle />
             <a href="#contact" className={buttonVariants({ size: "sm" })}>
               Book Me
             </a>
