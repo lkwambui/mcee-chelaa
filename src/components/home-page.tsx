@@ -1,4 +1,27 @@
+
 "use client";
+
+
+const curatedGallery = [
+  // Graduation
+  ...Array.from({ length: 10 }, (_, i) => ({
+    src: `/images/graduation/graduation${i + 1}.jpeg`,
+    alt: `MC Chelaa at graduation event ${i + 1}`,
+    category: "Graduation Ceremony",
+  })),
+  // Wedding
+  ...Array.from({ length: 10 }, (_, i) => ({
+    src: `/images/wedding/wedding${i + 1}.jpeg`,
+    alt: `MC Chelaa at wedding event ${i + 1}`,
+    category: "Wedding Celebration",
+  })),
+  // Baby Shower
+  ...Array.from({ length: 10 }, (_, i) => ({
+    src: `/images/baby-shower/baby-shower${i + 1}.jpeg`,
+    alt: `MC Chelaa at baby shower event ${i + 1}`,
+    category: "Baby Shower",
+  })),
+];
 
 import Image from "next/image";
 import Link from "next/link";
@@ -93,7 +116,7 @@ const portfolioImages = [
   },
   {
     category: "Little Mr & Miss Nakuru · 2026",
-    src: "/images/Little-Mr-and-Miss-Nakuru-2026/photo7.jpeg",
+    src: "/images/Little-Mr-and-Miss-Nakuru-2026/photo4.jpeg",
     alt: "MC Chelaa hosting Little Mr and Miss Nakuru 2026",
   },
   {
@@ -341,7 +364,7 @@ export function HomePage() {
         <div className="hero-cinematic-bg absolute inset-0" aria-hidden />
         <div className="hero-subject-ambient absolute inset-y-0 right-0 z-1 w-[62%]" aria-hidden />
         <Image
-          src="/images/Amwik-event-Golden-Tulip-Hotel-Westlands-Nairobi-2026/photo1.jpeg"
+          src="/images/Little-Mr-and-Miss-Nakuru-2026/photo7.jpeg"
           alt="MC Chelaa performing on stage"
           fill
           priority
@@ -478,6 +501,41 @@ export function HomePage() {
           {portfolioImages.map((item, index) => (
             <motion.figure
               key={`${item.category}-${index}`}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeInUp}
+              transition={{ duration: 0.4, delay: index * 0.06 }}
+              className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border"
+            >
+              <LocalImage
+                src={item.src}
+                alt={item.alt}
+                width={700}
+                height={index % 2 === 0 ? 920 : 740}
+                className="h-auto w-full object-cover transition duration-500 hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-foreground/85 to-transparent px-5 py-4 text-sm font-medium text-background">
+                {item.category}
+              </figcaption>
+            </motion.figure>
+          ))}
+        </div>
+      </section>
+
+
+      {/* Curated Gallery Section: Graduation, Wedding, Baby Shower */}
+      <section id="curated-gallery" className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-12">
+        <SectionTitle
+          eyebrow="Curated Moments"
+          title="Ceremonies & Celebrations"
+          description="A curated gallery of MC Chelaa elevating graduations, weddings, and baby showers with elegance, joy, and memorable experiences."
+        />
+        <div className="columns-1 gap-6 space-y-6 md:columns-2 lg:columns-3">
+          {curatedGallery.map((item, index) => (
+            <motion.figure
+              key={`curated-${index}`}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}

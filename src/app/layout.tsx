@@ -54,6 +54,25 @@ export const metadata: Metadata = {
       "Furaha Yako ni Choice Yako — MC Chelaa uses poetry and storytelling for healing, empowerment, and youth advocacy in Kenya.",
     images: [siteConfig.ogImage],
   },
+  alternates: {
+    canonical: siteConfig.url,
+    languages: {
+      "en-KE": siteConfig.url,
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      maxSnippet: -1,
+      maxImagePreview: "large",
+      maxVideoPreview: -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -63,6 +82,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#C9A227" />
+        <meta name="author" content="Precious Owoko (MC Chelaa)" />
+        <meta name="copyright" content="MC Chelaa" />
+      </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300 ease-in-out">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
