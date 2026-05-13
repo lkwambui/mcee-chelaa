@@ -68,9 +68,9 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       noimageindex: false,
-      maxSnippet: -1,
-      maxImagePreview: "large",
-      maxVideoPreview: -1,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
     },
   },
 };
