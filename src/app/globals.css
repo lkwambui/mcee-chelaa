@@ -1,43 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f5f5;
-  --foreground: #0f0f0f;
-  --muted: #ebe8e1;
-  --muted-foreground: #625d53;
-  --card: #ffffff;
-  --border: #e6e6e6;
-  --accent: #C9A227;
-  --accent-foreground: #111111;
+  --background: #FAF8F5;
+  --foreground: #101828;
+  --card: #FFFFFF;
+  --card-foreground: #101828;
+  --muted: #F0EDE8;
+  --muted-foreground: #667085;
+  --border: #E8E4DD;
+  --accent: #C79A2B;
+  --accent-foreground: #FFFFFF;
+  --accent-hover: #B8891F;
   --highlight: #5a1e3c;
+
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-manrope);
+
+  --shadow-card: 0 4px 20px rgba(16, 24, 40, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(16, 24, 40, 0.1);
+  --shadow-button: 0 2px 8px rgba(199, 154, 43, 0.3);
   --shadow-elevated: 0 16px 38px rgba(15, 15, 15, 0.12);
 }
 
 .dark {
   --background: #0b0b0b;
   --foreground: #f5f5f5;
+  --card: #141414;
+  --card-foreground: #f5f5f5;
   --muted: #161616;
   --muted-foreground: #c8c2b5;
-  --card: #141414;
   --border: #2a2a2a;
   --accent: #d4af37;
   --accent-foreground: #111111;
+  --accent-hover: #c49a2e;
   --highlight: #6c2a4a;
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --shadow-button: 0 2px 8px rgba(212, 175, 55, 0.35);
   --shadow-elevated: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-card: var(--card);
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
   --color-highlight: var(--highlight);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
 }
 
 html {
@@ -47,7 +63,7 @@ html {
 *,
 *::before,
 *::after {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
 }
@@ -55,7 +71,10 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-body), sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  font-weight: 400;
 }
 
 ::selection {
@@ -63,6 +82,7 @@ body {
   color: var(--foreground);
 }
 
+/* ─── Glass Effect ─── */
 .glass {
   background: linear-gradient(180deg, color-mix(in oklab, var(--card) 94%, transparent), color-mix(in oklab, var(--muted) 45%, transparent));
   backdrop-filter: blur(12px);
@@ -74,12 +94,113 @@ body {
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
+/* ─── Text Gradient ─── */
 .text-gradient {
   background-image: linear-gradient(120deg, #d4af37, #efd792 38%, #ba8c22 76%);
   background-clip: text;
   color: transparent;
 }
 
+/* ─── Typography Utility Classes ─── */
+.display-hero {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.section-title {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 52px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.card-title {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.body-text {
+  font-size: 18px;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+.small-label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.button-text {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .display-hero {
+    font-size: 48px;
+    letter-spacing: -0.02em;
+  }
+  .section-title {
+    font-size: 36px;
+  }
+  .card-title {
+    font-size: 28px;
+  }
+  .subtitle {
+    font-size: 20px;
+  }
+  .body-text {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
+
+/* ─── Navigation ─── */
+.nav-link {
+  position: relative;
+  font-family: var(--font-body), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: color-mix(in oklab, var(--foreground) 78%, transparent);
+  transition: color 300ms ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: width 300ms ease;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ─── Hero Classes ─── */
 .hero-overlay {
   background:
     radial-gradient(circle at 18% 28%, rgba(212, 175, 55, 0.2), transparent 52%),
@@ -188,6 +309,7 @@ body {
   opacity: 0.34;
 }
 
+/* ─── Achievement Classes ─── */
 .achievement-featured-card {
   box-shadow:
     0 24px 60px color-mix(in oklab, var(--foreground) 10%, transparent),
@@ -229,6 +351,7 @@ body {
     0 1px 0 rgba(255, 255, 255, 0.04) inset;
 }
 
+/* ─── Experience / Event Card Classes ─── */
 .experience-card {
   position: relative;
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
@@ -273,7 +396,7 @@ body {
 }
 
 .event-portfolio-card {
-  transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+  transition: transform 350ms ease, border-color 350ms ease, box-shadow 350ms ease;
 }
 
 .event-portfolio-card:hover {
@@ -297,6 +420,7 @@ body {
     0 1px 0 rgba(255, 255, 255, 0.05) inset;
 }
 
+/* ─── Gallery Open State ─── */
 body[data-gallery-open="true"] .site-header {
   opacity: 0;
   pointer-events: none;

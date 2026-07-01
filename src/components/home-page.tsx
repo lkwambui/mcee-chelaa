@@ -27,7 +27,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { type ComponentProps, FormEvent, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ThemeToggle } from "@/components/theme-toggle";
+
 import WhatsAppChatWidget from "@/components/WhatsAppChatWidget";
 import { EventGallery } from "@/components/EventGallery";
 import {
@@ -49,7 +49,7 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -261,6 +261,16 @@ const fadeInUp = {
   show: { opacity: 1, y: 0 },
 };
 
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.95 },
+  show: { opacity: 1, scale: 1 },
+};
+
 type LocalImageProps = Omit<ComponentProps<typeof Image>, "src"> & {
   src: string;
   fallbackSrc?: string;
@@ -294,14 +304,14 @@ function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title:
     <motion.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.3 }}
       variants={fadeInUp}
-      transition={{ duration: 0.55, ease: "easeOut" }}
-      className="mx-auto mb-12 max-w-3xl text-center"
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="mx-auto mb-16 max-w-3xl text-center"
     >
       <Badge>{eyebrow}</Badge>
-      <h2 className="mt-5 font-serif text-4xl leading-tight text-foreground md:text-5xl">{title}</h2>
-      <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">{description}</p>
+      <h2 className="section-title mt-5 text-foreground">{title}</h2>
+      <p className="body-text mt-5 max-w-2xl text-muted-foreground">{description}</p>
     </motion.div>
   );
 }
@@ -337,25 +347,25 @@ export function HomePage() {
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }} className="bg-background text-foreground">
       <header
         className={cn(
-          "site-header fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 shadow-sm backdrop-blur-md",
+          "site-header fixed inset-x-0 top-0 z-50 border-b border-border/20 bg-background/85 shadow-sm backdrop-blur-md",
           isGalleryOpen && "pointer-events-none -translate-y-full opacity-0"
         )}
       >
-        <nav className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 md:px-10">
-          <Link href="#home" className="font-serif text-2xl tracking-tight">
+        <nav className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-6 md:px-10">
+          <Link href="#home" className="font-display text-2xl tracking-tight text-foreground">
             MC <span className="text-gradient">Chelaa</span>
           </Link>
-          <div className="hidden items-center gap-7 md:flex">
+          <div className="hidden items-center gap-9 md:flex">
             {navItems.map((item) => (
-              <a key={item.href} href={item.href} className="text-sm font-medium text-foreground/80 transition hover:text-accent">
+              <a key={item.href} href={item.href} className="nav-link">
                 {item.label}
               </a>
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <a href="#contact" className={buttonVariants({ size: "sm" })}>
-              Book Me
-            </a>
+            <Button asChild size="sm">
+              <a href="#contact">Book Me</a>
+            </Button>
           </div>
         </nav>
       </header>
@@ -377,57 +387,51 @@ export function HomePage() {
 
         <div className="container relative z-10 mx-auto px-6 pt-28 pb-20 lg:px-12">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="max-w-xl rounded-2xl border border-white/10 bg-black/40 px-6 py-8 shadow-2xl backdrop-blur-md transition duration-500 hover:bg-black/50 md:px-10 md:py-12"
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-xl rounded-[20px] border border-white/15 bg-black/30 px-6 py-8 shadow-2xl shadow-black/25 backdrop-blur-lg transition duration-500 md:px-10 md:py-12"
           >
-            <Badge className="border-white/30 bg-white/12 text-white">Nakuru, Kenya</Badge>
-            <h1 className="mt-6 max-w-lg text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
+            <Badge className="border-white/30 bg-white/12 text-white backdrop-blur-sm">Nakuru, Kenya</Badge>
+            <h1 className="display-hero mt-6 text-white">
               MC Chelaa
-              <span className="mt-3 block text-white/95">Furaha Yako ni Choice Yako</span>
+              <span className="subtitle mt-4 block tracking-normal text-white/85">Furaha Yako ni Choice Yako</span>
             </h1>
-            <div className="mt-4 h-1 w-16 rounded-full bg-yellow-500" />
-            <p className="mt-4 max-w-lg leading-relaxed text-white/80">
+            <div className="mt-6 h-0.5 w-20 rounded-full bg-accent" />
+            <p className="body-text mt-6 max-w-lg text-white/80">
               MC Chelaa is a media creative, poetess, and premium event host crafting cinematic stage moments for brands, communities, and unforgettable experiences.
             </p>
-            <div className="mt-6 flex flex-wrap gap-4">
-              <a
-                href="#contact"
-                className="rounded-full bg-yellow-500 px-6 py-3 font-medium text-black shadow-md transition duration-300 hover:scale-105 hover:bg-yellow-400"
-              >
-                Book Me
-              </a>
-              <a
-                href="#portfolio"
-                className="rounded-full border border-white/40 px-6 py-3 text-white transition duration-300 hover:bg-white/10"
-              >
-                View Portfolio
-              </a>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button asChild>
+                <a href="#contact">Book Me</a>
+              </Button>
+              <Button variant="outline" asChild className="border-white/40 text-white hover:bg-white/10 hover:text-white">
+                <a href="#portfolio">View Portfolio</a>
+              </Button>
             </div>
-            <p className="mt-8 text-sm uppercase tracking-[0.3em] text-white/60">Grow from what&apos;s meant to kill you</p>
+            <p className="small-label mt-8 text-white/50">Grow from what&apos;s meant to kill you</p>
           </motion.div>
         </div>
       </section>
 
-      <section id="about" className="mx-auto grid w-full max-w-7xl gap-12 px-6 pt-28 pb-24 lg:px-12 md:grid-cols-2">
+      <section id="about" className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-30 lg:px-12 md:grid-cols-2">
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.35 }}
           variants={fadeInUp}
           transition={{ duration: 0.55 }}
-          className="relative min-h-105 overflow-hidden rounded-3xl"
+          className="relative min-h-105 overflow-hidden rounded-3xl shadow-[var(--shadow-card)] transition duration-500 hover:shadow-[var(--shadow-card-hover)]"
         >
           <LocalImage
             src="/images/corporate-events/corporate-events4.jpeg"
             alt="Portrait of MC Chelaa — media creative, poetess, and MC"
             fill
             quality={100}
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
-          />
-        </motion.div>
+              className="object-cover transition duration-700 hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
+            />
+          </motion.div>
 
         <motion.div
           initial="hidden"
@@ -438,11 +442,11 @@ export function HomePage() {
           className="flex flex-col justify-center"
         >
           <Badge>About</Badge>
-          <h2 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">Story, Voice, and Purpose</h2>
-          <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+          <h2 className="section-title mt-5 text-foreground">Story, Voice, and Purpose</h2>
+          <p className="body-text mt-6 text-muted-foreground">
             As the founder of Walking Shadow Poetry Kenya, MC Chelaa is a rising leader in Kenya's creative and media space, uniquely blending art, leadership, and social impact. She champions storytelling as a tool for healing, empowerment, mental health awareness, and resilience. Her voice blends elegance with emotional depth—from intimate spoken word sessions to high-level corporate stages.
           </p>
-          <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="body-text mt-5 text-muted-foreground">
             With experience in broadcasting, acting, poetry, and community engagement, she continues to influence and inspire through authentic storytelling, faith-driven purpose, and creative expression. She mentors young creatives and advocates for youth empowerment through media, artistry, and intentional visibility.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -453,7 +457,7 @@ export function HomePage() {
         </motion.div>
       </section>
 
-      <section id="services" className="bg-muted/35 px-6 py-24 lg:px-12">
+      <section id="services" className="bg-muted/35 px-6 py-30 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="Services"
@@ -461,59 +465,67 @@ export function HomePage() {
             description="From stage hosting to media storytelling, every service is tailored for impact, clarity, and unforgettable audience connection."
           />
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: { staggerChildren: 0.07, delayChildren: 0.1 },
+              },
+            }}
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {services.map((service, index) => {
               const Icon = service.icon;
 
               return (
                 <motion.div
                   key={service.title}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.25 }}
                   variants={fadeInUp}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
                 >
-                  <Card className="group h-full transition duration-300 hover:-translate-y-1.5 hover:border-accent/55">
+                  <Card className="group h-full border-border/70 hover:border-accent/45">
                     <CardHeader>
-                      <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/12 text-accent transition group-hover:scale-110">
-                        <Icon className="h-5 w-5" />
+                      <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent/8 text-accent transition duration-300 group-hover:bg-accent/15 group-hover:scale-105">
+                        <Icon className="h-6 w-6" />
                       </div>
                       <CardTitle>{service.title}</CardTitle>
-                      <CardDescription className="mt-3 text-[15px]">{service.description}</CardDescription>
+                      <CardDescription>{service.description}</CardDescription>
                     </CardHeader>
                   </Card>
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section id="portfolio" className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-12">
+      <section id="portfolio" className="mx-auto w-full max-w-7xl px-6 py-30 lg:px-12">
         <SectionTitle
           eyebrow="Portfolio"
           title="Moments in Motion"
           description="A glimpse into hosted events, spoken word showcases, and media appearances across Kenya."
         />
 
-        <div className="columns-1 gap-6 space-y-6 md:columns-2 lg:columns-3">
-          {portfolioImages.map((item, index) => (
-            <motion.figure
-              key={`${item.category}-${index}`}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInUp}
-              transition={{ duration: 0.4, delay: index * 0.06 }}
-              className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border"
-            >
-              <LocalImage
-                src={item.src}
-                alt={item.alt}
-                width={700}
-                height={index % 2 === 0 ? 920 : 740}
-                className="h-auto w-full object-cover transition duration-500 hover:scale-105"
+          <div className="columns-1 gap-6 space-y-6 md:columns-2 lg:columns-3">
+            {portfolioImages.map((item, index) => (
+              <motion.figure
+                key={`${item.category}-${index}`}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={fadeInUp}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border/70 shadow-[var(--shadow-card)] transition-shadow duration-500 hover:shadow-[var(--shadow-card-hover)]"
+              >
+                <LocalImage
+                  src={item.src}
+                  alt={item.alt}
+                  width={700}
+                  height={index % 2 === 0 ? 920 : 740}
+                  className="h-auto w-full object-cover transition duration-700 hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-foreground/85 to-transparent px-5 py-4 text-sm font-medium text-background">
@@ -526,7 +538,7 @@ export function HomePage() {
 
 
       {/* Curated Gallery Section: Graduation, Wedding, Baby Shower */}
-      <section id="curated-gallery" className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-12">
+      <section id="curated-gallery" className="mx-auto w-full max-w-7xl px-6 py-30 lg:px-12">
         <SectionTitle
           eyebrow="Curated Moments"
           title="Ceremonies & Celebrations"
@@ -541,14 +553,14 @@ export function HomePage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeInUp}
               transition={{ duration: 0.4, delay: index * 0.06 }}
-              className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border"
+              className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border/70 shadow-[var(--shadow-card)] transition-shadow duration-500 hover:shadow-[var(--shadow-card-hover)]"
             >
               <LocalImage
                 src={item.src}
                 alt={item.alt}
                 width={700}
                 height={index % 2 === 0 ? 920 : 740}
-                className="h-auto w-full object-cover transition duration-500 hover:scale-105"
+                className="h-auto w-full object-cover transition duration-700 hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-foreground/85 to-transparent px-5 py-4 text-sm font-medium text-background">
@@ -559,7 +571,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="achievements" className="bg-muted/35 px-6 py-24 lg:px-12">
+      <section id="achievements" className="bg-muted/35 px-6 py-30 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="Achievements"
@@ -595,16 +607,16 @@ export function HomePage() {
                     <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">
                       {featuredAchievement.result}
                     </p>
-                    <h3 className="mt-2 font-serif text-3xl leading-tight text-foreground md:text-4xl">
+                    <h3 className="card-title mt-2 text-foreground">
                       {featuredAchievement.title}
                     </h3>
-                    <p className="mt-3 text-base text-foreground/85 md:text-lg">
-                      {featuredAchievement.organization}
-                    </p>
+              <p className="body-text mt-3 text-foreground/85">
+                {featuredAchievement.organization}
+              </p>
                   </div>
                 </div>
 
-                <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
+                <p className="body-text mt-6 max-w-2xl text-muted-foreground">
                   {featuredAchievement.detail}
                 </p>
 
@@ -661,7 +673,7 @@ export function HomePage() {
                         {item.year}
                       </Badge>
                     </div>
-                    <h3 className="mt-2 text-base font-semibold leading-snug text-foreground md:text-lg">
+                    <h3 className="mt-2 text-xl font-semibold leading-snug text-foreground">
                       {item.title}
                     </h3>
                     <p className="mt-1 text-sm text-foreground/80">{item.organization}</p>
@@ -674,7 +686,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="experience" className="featured-events-bg relative mx-auto w-full max-w-7xl overflow-hidden px-6 py-24 lg:px-12">
+      <section id="experience" className="featured-events-bg relative mx-auto w-full max-w-7xl overflow-hidden px-6 py-30 lg:px-12">
         <div className="featured-events-glow pointer-events-none absolute inset-0" aria-hidden />
         <SectionTitle
           eyebrow="Events"
@@ -685,7 +697,7 @@ export function HomePage() {
         <EventGallery events={featuredEvents} onOpenChange={setIsGalleryOpen} />
       </section>
 
-      <section id="media" className="bg-muted/35 px-6 py-24 lg:px-12">
+      <section id="media" className="bg-muted/35 px-6 py-30 lg:px-12">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="Media"
@@ -711,8 +723,8 @@ export function HomePage() {
                     </video>
                   </div>
                   <CardHeader>
-                    <CardTitle className="text-2xl">{show.title}</CardTitle>
-                    <CardDescription className="mt-3 text-[15px]">{show.description}</CardDescription>
+                    <CardTitle>{show.title}</CardTitle>
+                    <CardDescription>{show.description}</CardDescription>
                   </CardHeader>
                 </Card>
               </motion.div>
@@ -721,7 +733,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="testimonials" className="mx-auto w-full max-w-4xl px-5 py-24 text-center md:px-10">
+      <section id="testimonials" className="mx-auto w-full max-w-4xl px-5 py-30 text-center md:px-10">
         <SectionTitle
           eyebrow="Testimonials"
           title="Words from Clients"
@@ -729,10 +741,10 @@ export function HomePage() {
         />
 
         <motion.div key={activeTestimonial} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-          <Card className="glass px-8 py-10 md:px-14">
-            <Quote className="mx-auto h-9 w-9 text-accent" />
-            <p className="mt-7 font-serif text-2xl leading-relaxed text-foreground">“{testimonials[activeTestimonial].quote}”</p>
-            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-accent">{testimonials[activeTestimonial].author}</p>
+          <Card className="glass px-8 py-12 md:px-16">
+            <Quote className="mx-auto h-10 w-10 text-accent" />
+            <p className="card-title mt-8 leading-relaxed text-foreground">“{testimonials[activeTestimonial].quote}”</p>
+            <p className="small-label mt-8 text-accent">{testimonials[activeTestimonial].author}</p>
           </Card>
         </motion.div>
 
@@ -751,18 +763,20 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10">
+      <section className="mx-auto w-full max-w-7xl px-5 pb-30 md:px-10">
         <div className="glass rounded-3xl px-7 py-14 text-center md:px-12">
           <Sparkles className="mx-auto h-9 w-9 text-accent" />
-          <h3 className="mt-6 font-serif text-4xl leading-tight md:text-5xl">Let&apos;s Create Something Memorable</h3>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <h3 className="section-title text-foreground">Let&apos;s Create Something Memorable</h3>
+          <p className="body-text mx-auto mt-5 max-w-2xl text-muted-foreground">
             From corporate stages to artistic showcases, MC Chelaa curates moments that leave lasting impact.
           </p>
-          <a href="#contact" className={cn(buttonVariants({ size: "lg" }), "mt-8 inline-flex")}>Book MC Chelaa</a>
+          <Button asChild size="lg" className="mt-8">
+            <a href="#contact">Book MC Chelaa</a>
+          </Button>
         </div>
       </section>
 
-      <section id="contact" className="bg-linear-to-b from-muted/45 to-transparent px-6 py-24 lg:px-12">
+      <section id="contact" className="bg-linear-to-b from-muted/45 to-transparent px-6 py-30 lg:px-12">
         <div className="mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-2">
           <motion.div
             initial="hidden"
@@ -772,8 +786,8 @@ export function HomePage() {
             transition={{ duration: 0.45 }}
           >
             <Badge>Contact</Badge>
-            <h3 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">Bookings & Collaborations</h3>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            <h3 className="section-title mt-5 text-foreground">Bookings & Collaborations</h3>
+            <p className="body-text mt-5 max-w-xl text-muted-foreground">
               Let&apos;s shape a premium event experience that speaks to your audience and brand goals.
             </p>
 
@@ -871,8 +885,67 @@ export function HomePage() {
         </div>
       </section>
 
-      <footer className="border-t border-border px-5 py-8 text-center text-sm text-muted-foreground md:px-10">
-        © {new Date().getFullYear()} MC Chelaa · Furaha Yako ni Choice Yako
+      <footer className="border-t border-border/60 bg-background">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10">
+          <div className="grid gap-10 md:grid-cols-3">
+            <div>
+              <Link href="#home" className="font-display text-2xl tracking-tight text-foreground">
+                MC <span className="text-gradient">Chelaa</span>
+              </Link>
+              <p className="body-text mt-4 text-muted-foreground max-w-xs">
+                Furaha Yako ni Choice Yako — premium event hosting, spoken word, and creative media.
+              </p>
+            </div>
+            <div>
+              <p className="small-label text-foreground/60 mb-4">Quick Links</p>
+              <nav className="space-y-3">
+                {navItems.map((item) => (
+                  <a key={item.href} href={item.href} className="nav-link block">
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+            <div>
+              <p className="small-label text-foreground/60 mb-4">Connect</p>
+              <div className="flex items-center gap-3">
+                <a
+                  href={socialLinks.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                  className="rounded-full border border-border bg-card p-3 text-foreground/70 transition hover:border-accent hover:text-accent"
+                >
+                  <AtSign className="h-4 w-4" />
+                </a>
+                <a
+                  href={socialLinks.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Facebook"
+                  className="rounded-full border border-border bg-card p-3 text-foreground/70 transition hover:border-accent hover:text-accent"
+                >
+                  <Globe className="h-4 w-4" />
+                </a>
+                <a
+                  href="mailto:mcchelaa254@gmail.com"
+                  aria-label="Email"
+                  className="rounded-full border border-border bg-card p-3 text-foreground/70 transition hover:border-accent hover:text-accent"
+                >
+                  <Mail className="h-4 w-4" />
+                </a>
+              </div>
+              <p className="body-text mt-6 text-muted-foreground">
+                Nakuru, Kenya
+              </p>
+            </div>
+          </div>
+          <div className="mt-12 border-t border-border/40 pt-8 text-center">
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} MC Chelaa · Furaha Yako ni Choice Yako
+            </p>
+          </div>
+        </div>
       </footer>
 
       <WhatsAppChatWidget phone="254719 360 781" />

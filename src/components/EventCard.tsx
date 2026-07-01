@@ -43,10 +43,10 @@ export function EventCard({ event, index, className, onViewGallery, onPreviewSel
         </div>
       </div>
 
-      <div className="relative space-y-4 p-5 md:p-6">
+      <div className="relative space-y-5 p-6 md:p-7">
         <div>
-          <h3 className="font-serif text-2xl leading-tight text-foreground md:text-3xl">{event.title}</h3>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-[15px]">{event.description}</p>
+          <h3 className="card-title text-foreground">{event.title}</h3>
+          <p className="body-text mt-3 text-muted-foreground">{event.description}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 text-sm text-foreground/80">

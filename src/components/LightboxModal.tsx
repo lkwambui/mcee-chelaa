@@ -121,7 +121,7 @@ export function LightboxModal({ event, isOpen, initialIndex = 0, onClose }: Ligh
             <div className="absolute inset-x-3 top-3 z-10 flex items-center justify-between gap-3 opacity-85 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 sm:inset-x-4 sm:top-4 md:opacity-75">
               <div className="max-w-[70%] rounded-2xl border border-white/15 bg-black/35 px-3 py-2 text-white backdrop-blur-sm sm:px-4 sm:py-3">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-xs">{event.year}</p>
-                <h3 className="mt-1 font-serif text-lg leading-tight sm:text-2xl">{event.title}</h3>
+                <h3 className="mt-1 text-lg leading-tight sm:text-2xl" style={{ fontFamily: "var(--font-display, Georgia, serif)", fontWeight: 600 }}>{event.title}</h3>
               </div>
 
               <div className="flex items-center gap-2">
