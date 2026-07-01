@@ -421,7 +421,7 @@ export function HomePage() {
           viewport={{ once: true, amount: 0.35 }}
           variants={fadeInUp}
           transition={{ duration: 0.55 }}
-          className="relative min-h-105 overflow-hidden rounded-3xl shadow-[var(--shadow-card)] transition duration-500 hover:shadow-[var(--shadow-card-hover)]"
+          className="relative min-h-105 overflow-hidden rounded-3xl shadow-(--shadow-card) transition duration-500 hover:shadow-(--shadow-card-hover)"
         >
           <LocalImage
             src="/images/corporate-events/corporate-events4.jpeg"
@@ -518,7 +518,7 @@ export function HomePage() {
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
                 transition={{ duration: 0.4, delay: index * 0.06 }}
-                className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border/70 shadow-[var(--shadow-card)] transition-shadow duration-500 hover:shadow-[var(--shadow-card-hover)]"
+                className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border/70 shadow-(--shadow-card) transition-shadow duration-500 hover:shadow-(--shadow-card-hover)"
               >
                 <LocalImage
                   src={item.src}
@@ -553,7 +553,7 @@ export function HomePage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeInUp}
               transition={{ duration: 0.4, delay: index * 0.06 }}
-              className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border/70 shadow-[var(--shadow-card)] transition-shadow duration-500 hover:shadow-[var(--shadow-card-hover)]"
+              className="relative break-inside-avoid overflow-hidden rounded-3xl border border-border/70 shadow-(--shadow-card) transition-shadow duration-500 hover:shadow-(--shadow-card-hover)"
             >
               <LocalImage
                 src={item.src}
