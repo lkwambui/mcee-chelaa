@@ -1,6 +1,5 @@
-"use client";
 
-import Image from "next/image";
+import { Image } from "@/components/app-image";
 import { motion } from "framer-motion";
 import { Calendar, Images, MapPin } from "lucide-react";
 

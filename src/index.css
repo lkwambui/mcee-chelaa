@@ -13,6 +13,8 @@
   --accent-hover: #B8891F;
   --highlight: #5a1e3c;
 
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-manrope: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-cormorant);
   --font-body: var(--font-manrope);
 

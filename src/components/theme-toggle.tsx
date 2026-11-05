@@ -1,27 +1,10 @@
-"use client";
-
-import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/components/theme-provider";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const mounted = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false
-  );
-
-  if (!mounted) {
-    return (
-      <Button variant="ghost" size="sm" aria-label="Toggle theme" className="h-9 w-9 rounded-full">
-        <span className="h-4 w-4" />
-      </Button>
-    );
-  }
-
   const isDark = resolvedTheme === "dark";
 
   return (

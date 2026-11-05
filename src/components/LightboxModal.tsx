@@ -1,7 +1,6 @@
-"use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
+import { Image } from "@/components/app-image";
 import { AnimatePresence, motion, type PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 

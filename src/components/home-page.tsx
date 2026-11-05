@@ -1,7 +1,4 @@
 
-"use client";
-
-
 const curatedGallery = [
   // Graduation
   ...Array.from({ length: 10 }, (_, i) => ({
@@ -23,13 +20,12 @@ const curatedGallery = [
   })),
 ];
 
-import Image from "next/image";
-import Link from "next/link";
 import { type ComponentProps, FormEvent, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-import WhatsAppChatWidget from "@/components/WhatsAppChatWidget";
 import { EventGallery } from "@/components/EventGallery";
+import { Image } from "@/components/app-image";
+import WhatsAppChatWidget from "@/components/WhatsAppChatWidget";
 import {
   AtSign,
   Award,
@@ -261,16 +257,6 @@ const fadeInUp = {
   show: { opacity: 1, y: 0 },
 };
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.95 },
-  show: { opacity: 1, scale: 1 },
-};
-
 type LocalImageProps = Omit<ComponentProps<typeof Image>, "src"> & {
   src: string;
   fallbackSrc?: string;
@@ -352,9 +338,9 @@ export function HomePage() {
         )}
       >
         <nav className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-6 md:px-10">
-          <Link href="#home" className="font-display text-2xl tracking-tight text-foreground">
+          <a href="#home" className="font-display text-2xl tracking-tight text-foreground">
             MC <span className="text-gradient">Chelaa</span>
-          </Link>
+          </a>
           <div className="hidden items-center gap-9 md:flex">
             {navItems.map((item) => (
               <a key={item.href} href={item.href} className="nav-link">
@@ -478,7 +464,7 @@ export function HomePage() {
             }}
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {services.map((service, index) => {
+            {services.map((service) => {
               const Icon = service.icon;
 
               return (
@@ -889,9 +875,9 @@ export function HomePage() {
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-10">
           <div className="grid gap-10 md:grid-cols-3">
             <div>
-              <Link href="#home" className="font-display text-2xl tracking-tight text-foreground">
+              <a href="#home" className="font-display text-2xl tracking-tight text-foreground">
                 MC <span className="text-gradient">Chelaa</span>
-              </Link>
+              </a>
               <p className="body-text mt-4 text-muted-foreground max-w-xs">
                 Furaha Yako ni Choice Yako — premium event hosting, spoken word, and creative media.
               </p>
