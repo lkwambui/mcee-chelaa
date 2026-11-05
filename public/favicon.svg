@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">MC Chelaa</title>
+  <rect width="64" height="64" rx="10" fill="#171717"/>
+  <text
+    x="32"
+    y="30"
+    text-anchor="middle"
+    dominant-baseline="central"
+    font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+    font-size="37"
+    font-weight="600"
+    letter-spacing="-1"
+    fill="#F3EFE7"
+  >MC</text>
+  <rect x="23.7" y="46" width="16.6" height="2.9" rx="1.45" fill="#B88746"/>
+</svg>
