@@ -1,28 +1,25 @@
 import { type ImgHTMLAttributes, useEffect, useState } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
-type AppImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
+type SmartImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   src: string;
   fill?: boolean;
   priority?: boolean;
-  quality?: number;
-  sizes?: string;
   fallbackSrc?: string;
 };
 
-export function Image({
+export function SmartImage({
   src,
   alt,
   fill,
   priority,
-  quality: _quality,
-  sizes: _sizes,
   fallbackSrc,
   className,
+  loading,
   onError,
   ...props
-}: AppImageProps) {
+}: SmartImageProps) {
   const [currentSrc, setCurrentSrc] = useState(src);
 
   useEffect(() => {
@@ -34,8 +31,9 @@ export function Image({
       {...props}
       src={currentSrc}
       alt={alt}
-      loading={priority ? "eager" : props.loading ?? "lazy"}
+      loading={priority ? "eager" : (loading ?? "lazy")}
       fetchPriority={priority ? "high" : undefined}
+      decoding="async"
       className={cn(fill && "absolute inset-0 h-full w-full", className)}
       onError={(event) => {
         if (fallbackSrc && currentSrc !== fallbackSrc) {
